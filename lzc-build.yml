@@ -1,0 +1,12 @@
+# manifest: 指定 lpk 包的 manifest.yml 文件路径
+manifest: ./lzc-manifest.yml
+
+# pkgout: lpk 包的输出路径
+pkgout: ./
+
+# icon: 指定 lpk 包 icon 的路径（必须是 PNG 格式）
+icon: ./icon.png
+
+# compose_override - 覆盖不支持的 Docker Compose 参数
+# 注意：此部分仅在有需要覆盖的参数时才生成
+# 本应用不需要 compose_override，所有参数都被 LazyCat 原生支持

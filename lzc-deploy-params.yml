@@ -1,0 +1,39 @@
+params:
+  - id: open_ai_base_url
+    type: string
+    name: "openai base url"
+    description: "OpenAI base url for AI features (https://api.openai.com/v1)"
+    default_value: ""
+    optional: true
+    placeholder: "https://api.openai.com/v1"
+    regex: "^https://api.openai.com/v1$"
+    regex_message: "OpenAI base url should be 'https://api.openai.com/v1'"
+
+  - id: openai_api_key
+    type: string
+    name: "openai api key"
+    description: "OpenAI API key for AI features (sk-...)"
+    default_value: ""
+    optional: true
+    placeholder: "sk-add-your-key"
+    regex: "^sk-[A-Za-z0-9]+$"
+    regex_message: "OpenAI API key should start with 'sk-' followed by alphanumeric characters"
+
+  - id: reranking_enabled
+    type: bool
+    name: "reranking enabled"
+    description: "Enable reranking feature for better search results"
+    default_value: false
+
+locales:
+  zh:
+    openai_base_url:
+      name: "OpenAI 基础 URL"
+      description: "用于 AI 功能的 OpenAI 基础 URL (https://api.openai.com/v1)"
+
+    openai_api_key:
+      name: "OpenAI API 密钥"
+      description: "用于 AI 功能的 OpenAI API 密钥 (sk-...)"
+    reranking_enabled:
+      name: "启用重排序"
+      description: "启用重排序功能以获得更好的搜索结果"
