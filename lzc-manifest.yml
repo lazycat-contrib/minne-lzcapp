@@ -30,6 +30,7 @@ services:
   minne:
     # ghcr.io/perstarkse/minne:v0.2.7
     image: registry.lazycat.cloud/czyt/perstarkse/minne:01aba4a9081aef34
+    user: appuser
     environment:
       - SURREALDB_ADDRESS=ws://surrealdb:8000
       - SURREALDB_USERNAME=lazycat
