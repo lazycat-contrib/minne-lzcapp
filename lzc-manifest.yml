@@ -1,7 +1,7 @@
 lzc-sdk-version: "0.1"
 name: Minne
 package: cloud.lazycat.app.minne
-version: 0.2.7
+version: 1.0.0
 min_os_version: 1.3.8
 description: "A Graph-Powered Personal Knowledge Base with SurrealDB and AI integration"
 license: MIT
@@ -28,8 +28,8 @@ services:
       - /lzcapp/var/database:/database
 
   minne:
-    # ghcr.io/perstarkse/minne:v0.2.7
-    image: registry.lazycat.cloud/czyt/perstarkse/minne:01aba4a9081aef34
+    # ghcr.io/perstarkse/minne:v1.0.0
+    image: registry.lazycat.cloud/czyt/perstarkse/minne:60ebcb2ce6ae435d
     user: appuser
     environment:
       - SURREALDB_ADDRESS=ws://surrealdb:8000
