@@ -1,0 +1,14 @@
+package: cloud.lazycat.app.minne
+version: 1.0.0
+name: Minne
+description: "基于 SurrealDB 和 AI 集成的图谱驱动个人知识库系统"
+min_os_version: "1.5.0"
+homepage: https://github.com/perstarkse/minne
+author: perstarkse
+locales:
+  zh:
+    description: "基于 SurrealDB 和 AI 集成的图谱驱动个人知识库系统"
+    name: Minne
+  en:
+    description: "A Graph-Powered Personal Knowledge Base with SurrealDB and AI integration"
+    name: Minne

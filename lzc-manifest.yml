@@ -1,40 +1,30 @@
-lzc-sdk-version: "0.1"
-name: Minne
-package: cloud.lazycat.app.minne
-version: 1.0.0
-min_os_version: 1.3.8
-description: "A Graph-Powered Personal Knowledge Base with SurrealDB and AI integration"
-license: MIT
-homepage: https://github.com/perstarkse/minne
-author: perstarkse
-
 application:
   subdomain: minne
-  routes:
-    - /=http://minne:3000
-
+  upstreams:
+    - location: /
+      backend: http://minne:3000/
 services:
   surrealdb:
-    # surrealdb/surrealdb:latest
-    image: registry.lazycat.cloud/czyt/surrealdb/surrealdb:05d840597db19b83
+    # upstream: surrealdb/surrealdb:v2.6.5
+    image: docker.1ms.run/surrealdb/surrealdb:v2.6.5
     user: root
     environment:
       - SURREALDB_USERNAME=lazycat
-      - SURREALDB_PASSWORD=lazycat
+      - SURREALDB_PASSWORD={{ stable_secret "db_password" }}
       - SURREALDB_DATABASE=minne
       - SURREALDB_NAMESPACE=minne
-    command: start --log info --user lazycat --pass lazycat rocksdb:/database/database.db
+    command: start --log info --user lazycat --pass {{ stable_secret "db_password" }} rocksdb:/database/database.db
     binds:
       - /lzcapp/var/database:/database
 
   minne:
-    # ghcr.io/perstarkse/minne:v1.0.0
-    image: registry.lazycat.cloud/czyt/perstarkse/minne:60ebcb2ce6ae435d
+    # upstream: ghcr.io/perstarkse/minne:v1.0.5
+    image: ghcr.1ms.run/perstarkse/minne:v1.0.5
     user: appuser
     environment:
       - SURREALDB_ADDRESS=ws://surrealdb:8000
       - SURREALDB_USERNAME=lazycat
-      - SURREALDB_PASSWORD=lazycat
+      - SURREALDB_PASSWORD={{ stable_secret "db_password" }}
       - SURREALDB_DATABASE=minne
       - SURREALDB_NAMESPACE=minne
       - OPENAI_BASE_URL={{.U.open_ai_base_url}}
@@ -48,11 +38,3 @@ services:
       - /lzcapp/var/data:/data
     depends_on:
       - surrealdb
-
-locales:
-  en:
-    name: "Minne"
-    description: "A Graph-Powered Personal Knowledge Base with SurrealDB and AI integration"
-  zh:
-    name: "Minne"
-    description: "基于 SurrealDB 和 AI 集成的图谱驱动个人知识库系统"

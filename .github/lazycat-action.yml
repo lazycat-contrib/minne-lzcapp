@@ -1,0 +1,48 @@
+version: 1
+
+project:
+  root: .
+  build_config: lzc-build.yml
+  package_file: package.yml
+  output: .lazycat-build/minne.lpk
+  target_arch: amd64
+
+update:
+  strategy: publish
+  allow_downgrade: false
+  version_source:
+    type: image
+    image: minne
+build:
+  run_buildscript: false
+images:
+  # 主应用：上游 ghcr 有完整三段 SemVer tag（v0.1.1~v1.0.5），排除 latest
+  - id: minne
+    target: service
+    service: minne
+    source: ghcr.io/perstarkse/minne
+    channel: stable
+    sort: semver
+    tag_regex: '^v\d+\.\d+\.\d+$'
+    delivery:
+      mode: mirror
+  # 辅助 surrealdb：上游 compose 固定 v2 家族（v2.6.5），v3 起 env 前缀变更不兼容，锁定 v2 家族
+  - id: surrealdb
+    target: service
+    service: surrealdb
+    source: surrealdb/surrealdb
+    channel: stable
+    sort: semver
+    tag_regex: '^v2\.\d+\.\d+$'
+    delivery:
+      mode: mirror
+
+stores:
+  official:
+    # Official store publication is intentionally disabled; publish only to Miaomiao Store.
+    enabled: false
+  private:
+    enabled: true
+    skip_if_version_exists: true
+    name: Minne
+    summary: "基于 SurrealDB 和 AI 集成的图谱驱动个人知识库系统"
