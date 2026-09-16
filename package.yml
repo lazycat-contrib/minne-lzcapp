@@ -1,5 +1,5 @@
 package: cloud.lazycat.app.minne
-version: 1.0.0
+version: 1.0.5
 name: Minne
 description: "基于 SurrealDB 和 AI 集成的图谱驱动个人知识库系统"
 min_os_version: "1.5.0"
