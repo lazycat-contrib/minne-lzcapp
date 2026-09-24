@@ -5,8 +5,8 @@ application:
       backend: http://minne:3000/
 services:
   surrealdb:
-    # upstream: surrealdb/surrealdb:v2.6.5
-    image: docker.1ms.run/surrealdb/surrealdb:v2.6.5
+    # upstream: surrealdb/surrealdb:v2.7.0
+    image: docker.1ms.run/surrealdb/surrealdb:v2.7.0
     user: root
     environment:
       - SURREALDB_USERNAME=lazycat
@@ -16,7 +16,6 @@ services:
     command: start --log info --user lazycat --pass {{ stable_secret "db_password" }} rocksdb:/database/database.db
     binds:
       - /lzcapp/var/database:/database
-
   minne:
     # upstream: ghcr.io/perstarkse/minne:v1.0.5
     image: ghcr.1ms.run/perstarkse/minne:v1.0.5
